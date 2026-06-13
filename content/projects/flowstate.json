@@ -1,0 +1,16 @@
+{
+  "slug": "flowstate",
+  "title": "FlowState",
+  "description": "A real-time collaborative workspace for remote design teams with live cursors and version history.",
+  "tags": ["React", "Node.js", "WebSockets", "Design"],
+  "image": "/images/projects/flowstate.svg",
+  "liveUrl": "https://flowstate-demo.vercel.app",
+  "repoUrl": "https://github.com/alexmorgan/flowstate",
+  "featured": true,
+  "date": "2025-11-15",
+  "overview": "FlowState is a collaborative design workspace that lets distributed teams edit Figma-like canvases in real time. Built for a Series A startup, it replaced a patchwork of Slack threads and static exports with a single source of truth for design reviews.",
+  "challenge": "The client needed sub-100ms cursor sync across 20+ concurrent users, offline resilience for flaky connections, and a permissions model that matched their existing RBAC system. Legacy tools couldn't handle the scale without expensive enterprise licenses.",
+  "solution": "I architected a WebSocket layer on Node.js with operational transformation for conflict resolution, paired with a React canvas built on Konva. Redis pub/sub handles horizontal scaling, while IndexedDB caches enable offline edits that sync on reconnect. A custom RBAC middleware maps roles to canvas-level permissions.",
+  "techStack": ["Next.js", "React", "TypeScript", "Node.js", "WebSockets", "Redis", "PostgreSQL", "Konva", "Tailwind CSS"],
+  "results": "Reduced design review cycles from 3 days to 4 hours. Supports 50 concurrent users with p99 latency under 80ms. Adopted by 12 teams within the first month of launch."
+}

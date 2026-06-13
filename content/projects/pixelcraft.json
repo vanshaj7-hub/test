@@ -1,0 +1,16 @@
+{
+  "slug": "pixelcraft",
+  "title": "PixelCraft Studio",
+  "description": "Design system and component library powering a multi-brand e-commerce platform.",
+  "tags": ["React", "Design", "Storybook", "TypeScript"],
+  "image": "/images/projects/pixelcraft.svg",
+  "liveUrl": "https://pixelcraft-storybook.vercel.app",
+  "repoUrl": "https://github.com/alexmorgan/pixelcraft",
+  "featured": true,
+  "date": "2025-08-22",
+  "overview": "PixelCraft is a token-driven design system built to unify three e-commerce brands under one technical foundation. It includes 40+ accessible components, dark mode support, and automated visual regression testing.",
+  "challenge": "Three brands with distinct visual identities needed to share infrastructure without looking identical. Designers wanted Figma-to-code parity, while engineers demanded tree-shakeable imports and strict TypeScript props.",
+  "solution": "I created a multi-theme token architecture using CSS custom properties, with brand overrides layered on a shared primitive set. Storybook documents every component with interaction tests. A custom CLI scaffolds new components with tests and docs pre-wired.",
+  "techStack": ["React", "TypeScript", "Tailwind CSS", "Storybook", "Chromatic", "Radix UI", "Figma Tokens"],
+  "results": "Cut new feature UI development time by 40%. Zero accessibility regressions in 6 months of Chromatic snapshots. Design-dev handoff time dropped from 2 days to same-day."
+}

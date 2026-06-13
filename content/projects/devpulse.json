@@ -1,0 +1,16 @@
+{
+  "slug": "devpulse",
+  "title": "DevPulse Analytics",
+  "description": "Developer productivity dashboard aggregating GitHub, Jira, and CI metrics into actionable insights.",
+  "tags": ["Next.js", "Node.js", "PostgreSQL", "Data Viz"],
+  "image": "/images/projects/devpulse.svg",
+  "liveUrl": "https://devpulse.app",
+  "repoUrl": "https://github.com/alexmorgan/devpulse",
+  "featured": true,
+  "date": "2025-05-10",
+  "overview": "DevPulse gives engineering managers a single pane of glass for team health — cycle time, PR throughput, incident frequency, and sprint predictability — without the noise of raw Jira exports.",
+  "challenge": "Data lived across GitHub, Jira, PagerDuty, and CircleCI with no common schema. Managers spent hours in spreadsheets. The product needed to feel lightweight despite aggregating millions of events.",
+  "solution": "I built an ETL pipeline in Node.js that normalizes events into a PostgreSQL star schema, with materialized views for dashboard queries under 200ms. The Next.js frontend uses Recharts for interactive drill-downs and server components for fast initial loads.",
+  "techStack": ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Prisma", "Recharts", "GitHub API", "Jira API"],
+  "results": "Onboarded 8 engineering teams in Q1. Average dashboard load under 1.2s. Identified a 30% bottleneck in PR review time that led to process changes saving 6 hours/week per team."
+}

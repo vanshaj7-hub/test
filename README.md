@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Portfolio Website
+
+A modern personal portfolio built with Next.js 15, showcasing full-stack development and design skills. Features project case studies, an MDX blog, contact form with email delivery, and dark/light theme support.
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Animation:** Framer Motion
+- **Blog:** MDX via `next-mdx-remote`
+- **Contact:** Supabase storage with optional Resend email and mailto fallback
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm
+
+### Installation
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Yes (prod) | Site URL for metadata and sitemap |
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes (contact) | Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Yes (contact) | Service role key for server-side inserts (keep secret) |
+| `RESEND_API_KEY` | No | Resend API key for contact form email notifications |
+| `CONTACT_EMAIL` | No | Destination email when Resend is enabled |
 
-## Learn More
+### Supabase setup
 
-To learn more about Next.js, take a look at the following resources:
+1. Create a Supabase project at [supabase.com](https://supabase.com).
+2. Run the migration in `supabase/migrations/001_contact_submissions.sql` via the Supabase SQL editor (or Supabase CLI).
+3. Copy your project URL and **service role** key into `.env.local`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Submissions are stored in the `contact_submissions` table. Row Level Security is enabled with no public policies — only the server API route writes data using the service role key.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Without Supabase or Resend configured, the contact form logs submissions server-side and shows a mailto fallback.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/                  # Next.js App Router pages
+components/ui/        # Reusable UI components
+components/sections/    # Page sections (Hero, Nav, etc.)
+content/projects/     # Project data (JSON)
+content/blog/         # Blog posts (MDX)
+lib/                  # Data helpers and utilities
+public/               # Static assets (resume.pdf, images)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+
+## Customization
+
+1. **Personal info:** Edit `lib/utils.ts` (`siteConfig`)
+2. **Projects:** Add/edit JSON files in `content/projects/`
+3. **Blog posts:** Add MDX files to `content/blog/`
+4. **Resume:** Replace `public/resume.pdf`
+5. **Images:** Add screenshots to `public/images/`
+6. **Accent color:** Update indigo tokens in `app/globals.css` and components
+
+## Deployment
+
+Deploy to Vercel:
+
+```bash
+npx vercel
+```
+
+Set environment variables in the Vercel dashboard. Update `NEXT_PUBLIC_SITE_URL` to your Vercel subdomain or custom domain.
+
+## License
+
+Private — all rights reserved.

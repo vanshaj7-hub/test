@@ -1,0 +1,16 @@
+{
+  "slug": "canvas-api",
+  "title": "Canvas API Platform",
+  "description": "Headless CMS and content API with GraphQL, webhooks, and multi-tenant architecture.",
+  "tags": ["Node.js", "GraphQL", "PostgreSQL", "API"],
+  "image": "/images/projects/canvas-api.svg",
+  "liveUrl": "https://canvas-api-docs.vercel.app",
+  "repoUrl": "https://github.com/alexmorgan/canvas-api",
+  "featured": false,
+  "date": "2024-09-18",
+  "overview": "Canvas is a headless content platform I built to power marketing sites for agency clients. It provides a GraphQL API, webhook delivery, media transforms, and tenant isolation — all self-hostable.",
+  "challenge": "Agencies needed a CMS cheaper than Contentful with better DX than Strapi. Multi-tenancy, rate limiting, and webhook reliability were non-negotiable for production client sites.",
+  "solution": "I designed a schema-per-tenant PostgreSQL model with row-level security, a GraphQL layer via Apollo Server, and S3-compatible media storage. Webhooks use a retry queue with exponential backoff and dead-letter logging.",
+  "techStack": ["Node.js", "TypeScript", "GraphQL", "PostgreSQL", "Redis", "S3", "Docker", "OpenAPI"],
+  "results": "Powers 14 client sites with 99.97% uptime over 12 months. API p95 response time under 45ms. Reduced per-client CMS costs by 70% vs. previous SaaS solution."
+}

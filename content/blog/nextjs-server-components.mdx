@@ -1,0 +1,45 @@
+---
+title: "Next.js 15 Server Components in Practice"
+date: "2025-09-28"
+tags: ["Next.js", "React", "Performance"]
+excerpt: "When to reach for Server Components, when to stay client-side, and patterns that have worked in production apps."
+---
+
+Server Components changed how I think about data fetching in Next.js. Here's a distilled version of what I've learned shipping RSC-based apps.
+
+## The mental model
+
+Server Components run on the server and send HTML to the client. They can:
+
+- Access databases and file systems directly
+- Keep large dependencies off the client bundle
+- Stream content with Suspense
+
+Client Components (`"use client"`) are for interactivity — state, effects, event handlers.
+
+## A practical split
+
+```tsx
+// app/projects/page.tsx — Server Component
+import { getAllProjects } from "@/lib/projects";
+import { ProjectsFilter } from "@/components/sections/ProjectsFilter";
+
+export default function ProjectsPage() {
+  const projects = getAllProjects();
+  return <ProjectsFilter projects={projects} tags={getAllTags()} />;
+}
+```
+
+The data fetch stays on the server. Only the filter UI ships JavaScript to the client.
+
+## When NOT to use Server Components
+
+- Forms with controlled inputs
+- Theme toggles and animation libraries
+- Anything using `useState`, `useEffect`, or browser APIs
+
+## Performance wins
+
+In a recent project, moving data fetching to Server Components reduced the client JS bundle by 40KB and improved LCP by 0.8 seconds. The tradeoff is slightly more complex mental overhead — but the performance gains are real.
+
+Start server-first, add `"use client"` only where you need interactivity.

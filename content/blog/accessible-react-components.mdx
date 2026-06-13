@@ -1,0 +1,53 @@
+---
+title: "Building Accessible React Components"
+date: "2025-10-12"
+tags: ["React", "Accessibility", "TypeScript"]
+excerpt: "A practical guide to building React components that work for everyone — keyboard users, screen reader users, and everyone in between."
+---
+
+Accessibility isn't a feature you bolt on at the end. It's a design constraint that makes your components better for everyone. Here's how I approach it in production React codebases.
+
+## Start with semantic HTML
+
+Before reaching for ARIA, use the right HTML element:
+
+```tsx
+// ❌ Avoid
+<div onClick={handleClick} className="button">Submit</div>
+
+// ✅ Prefer
+<button type="button" onClick={handleClick}>Submit</button>
+```
+
+Native elements come with keyboard support, focus management, and screen reader semantics built in.
+
+## Focus management
+
+Visible focus states are non-negotiable. I use Tailwind's `focus-visible` variant to show focus rings only for keyboard navigation:
+
+```tsx
+<button className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+  Click me
+</button>
+```
+
+## Respect motion preferences
+
+Wrap animations in a `useReducedMotion` check:
+
+```tsx
+const shouldReduceMotion = useReducedMotion();
+
+if (shouldReduceMotion) {
+  return <div>{children}</div>;
+}
+```
+
+## Testing checklist
+
+- Tab through every interactive element
+- Test with VoiceOver or NVDA
+- Run axe DevTools on every page
+- Check color contrast with WebAIM's tool
+
+Building accessible components takes practice, but the payoff is a product that works for all your users — and often cleaner, more maintainable code.

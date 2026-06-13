@@ -1,0 +1,16 @@
+{
+  "slug": "meridian",
+  "title": "Meridian Maps",
+  "description": "Interactive geospatial platform for urban planning with 3D building visualizations.",
+  "tags": ["React", "Mapbox", "Three.js", "Design"],
+  "image": "/images/projects/meridian.svg",
+  "liveUrl": "https://meridian-maps.vercel.app",
+  "repoUrl": "https://github.com/alexmorgan/meridian",
+  "featured": false,
+  "date": "2024-12-03",
+  "overview": "Meridian Maps helps city planners visualize zoning changes, traffic patterns, and proposed developments on an interactive 3D map. Built as a freelance project for a municipal consultancy.",
+  "challenge": "Rendering thousands of building footprints with height data while maintaining 60fps on mid-range laptops. Planners needed to toggle layers, draw polygons, and export PDF reports — all in the browser.",
+  "solution": "I combined Mapbox GL JS for base tiles with a custom Three.js layer for extruded buildings, using instanced meshes for performance. A Web Worker handles geospatial calculations off the main thread. Export uses html2canvas with a server-side PDF merge.",
+  "techStack": ["React", "TypeScript", "Mapbox GL", "Three.js", "Turf.js", "Node.js", "PDFKit"],
+  "results": "Handles 15,000 building footprints at 60fps on M1 MacBooks. Reduced report generation from 45 minutes to 3 minutes. Won a follow-on contract for phase two features."
+}

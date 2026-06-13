@@ -1,0 +1,60 @@
+---
+title: "Design Tokens for Multi-Brand Systems"
+date: "2025-08-05"
+tags: ["Design", "CSS", "Design Systems"]
+excerpt: "How to architect CSS custom properties that scale across multiple brand identities without duplicating components."
+---
+
+When one design system powers three brands, you need a token architecture that separates structure from skin. Here's the approach I used on a recent e-commerce platform.
+
+## Three layers of tokens
+
+**Primitive tokens** — raw values:
+
+```css
+:root {
+  --color-indigo-500: #6366f1;
+  --color-zinc-900: #18181b;
+  --space-4: 1rem;
+}
+```
+
+**Semantic tokens** — purpose-driven:
+
+```css
+:root {
+  --color-primary: var(--color-indigo-500);
+  --color-text: var(--color-zinc-900);
+  --color-surface: white;
+}
+```
+
+**Brand overrides** — per-brand skin:
+
+```css
+[data-brand="acme"] {
+  --color-primary: #e11d48;
+}
+
+[data-brand="globex"] {
+  --color-primary: #0891b2;
+}
+```
+
+## Component consumption
+
+Components reference semantic tokens only:
+
+```tsx
+<button className="bg-[var(--color-primary)] text-[var(--color-on-primary)]">
+  Add to Cart
+</button>
+```
+
+This means zero component changes when adding a new brand — just a new CSS override file.
+
+## Figma sync
+
+We used Figma Tokens plugin to export JSON, then a build script generates the CSS custom property files. Design and code stay in sync without manual copy-paste.
+
+The result: 40 shared components, 3 distinct brand experiences, one codebase.
