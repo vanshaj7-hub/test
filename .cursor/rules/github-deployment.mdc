@@ -1,0 +1,46 @@
+---
+description: GitHub Actions deployment workflow and Vercel production setup
+globs: .github/workflows/**/*
+alwaysApply: false
+---
+
+# GitHub Deployment
+
+This repo deploys from [vanshaj7-hub/test](https://github.com/vanshaj7-hub/test) via `.github/workflows/deploy.yml`.
+
+## Workflow
+
+- **CI** (every push/PR to `master` or `main`): `npm ci`, `npm run lint`, `npm run build`
+- **Deploy** (push to `master`/`main` only): Vercel production deploy using prebuilt artifacts
+
+## Required GitHub secrets
+
+Set in **Settings → Secrets and variables → Actions**:
+
+| Secret | Description |
+|--------|-------------|
+| `VERCEL_TOKEN` | Vercel account token |
+| `VERCEL_ORG_ID` | Team or user ID from Vercel project settings |
+| `VERCEL_PROJECT_ID` | Project ID from Vercel project settings |
+
+## Required GitHub variables
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Production site URL (used in CI build) |
+
+## Vercel environment variables
+
+Configure in the Vercel dashboard for production runtime:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_SITE_URL`
+- `RESEND_API_KEY` (optional)
+- `CONTACT_EMAIL` (optional)
+
+## Conventions
+
+- Do not commit `.env*` files; use GitHub Secrets and Vercel env vars instead.
+- Keep deploy workflow on `master`/`main` branches only for production.
+- Run `npm run build` locally before changing workflow or Next.js config.

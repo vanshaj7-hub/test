@@ -81,7 +81,24 @@ public/               # Static assets (resume.pdf, images)
 
 ## Deployment
 
-Deploy to Vercel:
+This repo uses GitHub Actions (`.github/workflows/deploy.yml`) to lint, build, and deploy to Vercel on pushes to `master` or `main`.
+
+### GitHub setup
+
+Repository: [github.com/vanshaj7-hub/test](https://github.com/vanshaj7-hub/test)
+
+1. Create a Vercel project linked to this repo (or import it in the [Vercel dashboard](https://vercel.com)).
+2. Add **Actions secrets** in GitHub (**Settings → Secrets and variables → Actions**):
+   - `VERCEL_TOKEN` — from [Vercel account tokens](https://vercel.com/account/tokens)
+   - `VERCEL_ORG_ID` — from Vercel project **Settings → General**
+   - `VERCEL_PROJECT_ID` — from Vercel project **Settings → General**
+3. Add **Actions variable**:
+   - `NEXT_PUBLIC_SITE_URL` — your production URL (e.g. `https://your-app.vercel.app`)
+4. Add production env vars in Vercel (`NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, etc.).
+
+Pushes to `master` run CI on every commit and deploy to Vercel production when checks pass.
+
+### Manual deploy
 
 ```bash
 npx vercel
