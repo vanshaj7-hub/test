@@ -2,33 +2,37 @@
 
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { siteConfig } from "@/lib/utils";
+import { isNavLinkActive, navLinks, siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
 export function Nav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const isHome = pathname === "/";
+
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-zinc-50/80 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/80">
+    <header
+      className={cn(
+        "sticky top-0 z-50 backdrop-blur-md",
+        isHome
+          ? "border-b border-violet-500/10 bg-[#050510]/70"
+          : "border-b border-zinc-200/80 bg-zinc-50/80 dark:border-zinc-800/80 dark:bg-zinc-950/80"
+      )}
+    >
       <nav
         className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
         aria-label="Main navigation"
       >
         <Link
           href="/"
-          className="font-display text-lg font-bold text-zinc-900 dark:text-zinc-100"
+          className={cn(
+            "font-display text-lg font-bold",
+            isHome ? "text-white" : "text-zinc-900 dark:text-zinc-100"
+          )}
         >
           {siteConfig.name.split(" ")[0]}
           <span className="text-indigo-500">.</span>
@@ -41,11 +45,15 @@ export function Nav() {
               href={link.href}
               className={cn(
                 "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                pathname === link.href
-                  ? "text-indigo-500 dark:text-indigo-400"
-                  : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                isNavLinkActive(pathname, link.href)
+                  ? isHome
+                    ? "text-violet-300"
+                    : "text-indigo-500 dark:text-indigo-400"
+                  : isHome
+                    ? "text-zinc-400 hover:text-white"
+                    : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
               )}
-              aria-current={pathname === link.href ? "page" : undefined}
+              aria-current={isNavLinkActive(pathname, link.href) ? "page" : undefined}
             >
               {link.label}
             </Link>
@@ -85,7 +93,10 @@ export function Nav() {
       {mobileOpen && (
         <div
           id="mobile-menu"
-          className="border-t border-zinc-200 px-4 py-4 md:hidden dark:border-zinc-800"
+          className={cn(
+            "border-t px-4 py-4 md:hidden",
+            isHome ? "border-violet-500/10" : "border-zinc-200 dark:border-zinc-800"
+          )}
         >
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
@@ -95,9 +106,13 @@ export function Nav() {
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "rounded-lg px-3 py-2.5 text-sm font-medium",
-                  pathname === link.href
-                    ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400"
-                    : "text-zinc-700 dark:text-zinc-300"
+                  isNavLinkActive(pathname, link.href)
+                    ? isHome
+                      ? "bg-violet-500/15 text-violet-300"
+                      : "bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400"
+                    : isHome
+                      ? "text-zinc-400"
+                      : "text-zinc-700 dark:text-zinc-300"
                 )}
               >
                 {link.label}

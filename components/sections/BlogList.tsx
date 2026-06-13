@@ -3,6 +3,7 @@ import { Tag } from "@/components/ui/Tag";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
 import type { BlogPostMeta } from "@/lib/blog";
+import { formatDate } from "@/lib/format";
 import Link from "next/link";
 
 interface BlogListProps {
@@ -18,13 +19,7 @@ export function BlogList({ posts }: BlogListProps) {
             <Link href={`/blog/${post.slug}`} className="group block">
               <Card hover>
                 <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
-                  <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </time>
+                  <time dateTime={post.date}>{formatDate(post.date)}</time>
                   <span aria-hidden="true">·</span>
                   <span>{post.readingTime}</span>
                 </div>

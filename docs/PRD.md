@@ -1,3 +1,5 @@
+> **Archived product spec** — see README for current setup.
+
 # Personal Portfolio Website â€” Product Requirements Document
 
 **Version:** 1.0  
@@ -521,3 +523,4 @@ All open questions from planning have been resolved for v1 implementation:
 ---
 
 *End of PRD*
+

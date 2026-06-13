@@ -9,12 +9,12 @@ export default function HomePage() {
   const featuredProjects = getFeaturedProjects().slice(0, 3);
 
   return (
-    <>
+    <div className="landing-page">
       <Hero />
       <ProjectsGrid projects={featuredProjects} showViewAll />
       <Skills />
       <AboutTeaser />
       <ContactCTA />
-    </>
+    </div>
   );
 }

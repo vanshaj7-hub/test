@@ -2,6 +2,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Tag } from "@/components/ui/Tag";
 import { FadeIn } from "@/components/ui/FadeIn";
 import type { BlogPostMeta } from "@/lib/blog";
+import { formatDate } from "@/lib/format";
 import Link from "next/link";
 
 interface BlogPostLayoutProps {
@@ -21,13 +22,7 @@ export function BlogPostLayout({
         <FadeIn>
           <header>
             <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
-              <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
               <span aria-hidden="true">·</span>
               <span>{post.readingTime}</span>
             </div>

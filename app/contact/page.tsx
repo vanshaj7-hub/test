@@ -1,7 +1,8 @@
 import { ContactForm } from "@/components/sections/ContactForm";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
-import { siteConfig } from "@/lib/utils";
+import { SocialLinks } from "@/components/ui/SocialLinks";
+import { siteConfig } from "@/lib/site";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -38,28 +39,7 @@ export default function ContactPage() {
               <h2 className="font-display text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                 Social
               </h2>
-              <ul className="mt-2 space-y-2" role="list">
-                <li>
-                  <a
-                    href={siteConfig.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-indigo-500 hover:text-indigo-600 dark:text-indigo-400"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={siteConfig.links.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-indigo-500 hover:text-indigo-600 dark:text-indigo-400"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-              </ul>
+              <SocialLinks variant="list" className="mt-2" />
             </div>
 
             <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900/50">

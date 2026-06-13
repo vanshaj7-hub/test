@@ -1,45 +1,8 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
-import { siteConfig } from "@/lib/utils";
-
-const skillGroups = [
-  {
-    category: "Frontend",
-    skills: [
-      { name: "React / Next.js", level: 5 },
-      { name: "TypeScript", level: 5 },
-      { name: "Tailwind CSS", level: 5 },
-      { name: "Framer Motion", level: 4 },
-    ],
-  },
-  {
-    category: "Backend",
-    skills: [
-      { name: "Node.js", level: 5 },
-      { name: "PostgreSQL", level: 4 },
-      { name: "GraphQL", level: 4 },
-      { name: "Redis", level: 3 },
-    ],
-  },
-  {
-    category: "Design",
-    skills: [
-      { name: "UI/UX Design", level: 4 },
-      { name: "Design Systems", level: 5 },
-      { name: "Figma", level: 5 },
-      { name: "Accessibility", level: 4 },
-    ],
-  },
-  {
-    category: "Tools",
-    skills: [
-      { name: "Git / GitHub", level: 5 },
-      { name: "Docker", level: 3 },
-      { name: "Vercel / CI/CD", level: 4 },
-      { name: "Storybook", level: 4 },
-    ],
-  },
-];
+import { SocialLinks } from "@/components/ui/SocialLinks";
+import { getSkillsForAbout } from "@/lib/skills";
+import { siteConfig } from "@/lib/site";
 
 function ProficiencyDots({ level }: { level: number }) {
   return (
@@ -59,6 +22,8 @@ function ProficiencyDots({ level }: { level: number }) {
 }
 
 export function AboutContent() {
+  const skillGroups = getSkillsForAbout();
+
   return (
     <Section title="About" subtitle={siteConfig.role}>
       <div className="grid gap-12 lg:grid-cols-3">
@@ -69,30 +34,7 @@ export function AboutContent() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400"
-            >
-              GitHub →
-            </a>
-            <a
-              href={siteConfig.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400"
-            >
-              LinkedIn →
-            </a>
-            <a
-              href={`mailto:${siteConfig.links.email}`}
-              className="text-sm font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400"
-            >
-              Email →
-            </a>
-          </div>
+          <SocialLinks className="mt-8" />
         </FadeIn>
 
         <FadeIn delay={0.2}>

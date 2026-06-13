@@ -1,12 +1,10 @@
 "use client";
 
-import { Card } from "@/components/ui/Card";
-import { Tag } from "@/components/ui/Tag";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Section } from "@/components/ui/Section";
+import { Tag } from "@/components/ui/Tag";
 import type { Project } from "@/lib/projects";
-import Image from "next/image";
-import Link from "next/link";
 import { useMemo, useState } from "react";
 
 interface ProjectsFilterProps {
@@ -19,7 +17,7 @@ export function ProjectsFilter({ projects, tags }: ProjectsFilterProps) {
 
   const filtered = useMemo(() => {
     if (!activeTag) return projects;
-    return projects.filter((p) => p.tags.includes(activeTag));
+    return projects.filter((project) => project.tags.includes(activeTag));
   }, [projects, activeTag]);
 
   return (
@@ -51,32 +49,10 @@ export function ProjectsFilter({ projects, tags }: ProjectsFilterProps) {
         <div className="grid gap-6 sm:grid-cols-2">
           {filtered.map((project, index) => (
             <FadeIn key={project.slug} delay={index * 0.05}>
-              <Link href={`/projects/${project.slug}`} className="group block h-full">
-                <Card hover className="flex h-full flex-col overflow-hidden p-0">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                    <Image
-                      src={project.image}
-                      alt={`${project.title} project screenshot`}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="font-display text-lg font-semibold text-zinc-900 group-hover:text-indigo-500 dark:text-zinc-100 dark:group-hover:text-indigo-400">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 flex-1 text-sm text-zinc-600 dark:text-zinc-400">
-                      {project.description}
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <Tag key={tag}>{tag}</Tag>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-              </Link>
+              <ProjectCard
+                project={project}
+                imageSizes="(max-width: 640px) 100vw, 50vw"
+              />
             </FadeIn>
           ))}
         </div>

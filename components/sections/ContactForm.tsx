@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { siteConfig } from "@/lib/utils";
+import { siteConfig } from "@/lib/site";
 import { FormEvent, useState } from "react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";

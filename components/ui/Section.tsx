@@ -18,7 +18,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("py-16 md:py-24", className)}
+      className={cn("landing-section py-16 md:py-24", className)}
       {...props}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -30,7 +30,7 @@ export function Section({
               </h2>
             )}
             {subtitle && (
-              <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
+              <p className="landing-subtitle mt-4 text-lg text-zinc-600 dark:text-zinc-400">
                 {subtitle}
               </p>
             )}

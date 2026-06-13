@@ -1,6 +1,6 @@
 import { AboutContent } from "@/components/sections/AboutContent";
 import type { Metadata } from "next";
-import { siteConfig } from "@/lib/utils";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",

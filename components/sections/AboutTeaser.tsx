@@ -1,7 +1,7 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Section } from "@/components/ui/Section";
-import { siteConfig } from "@/lib/utils";
+import { siteConfig } from "@/lib/site";
 
 export function AboutTeaser() {
   return (

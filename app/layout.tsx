@@ -1,7 +1,7 @@
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
-import { siteConfig } from "@/lib/utils";
+import { siteConfig } from "@/lib/site";
 import type { Metadata } from "next";
 import { Geist, Inter } from "next/font/google";
 import "./globals.css";

@@ -1,26 +1,10 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
-
-const skillGroups = [
-  {
-    category: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-  },
-  {
-    category: "Backend",
-    skills: ["Node.js", "PostgreSQL", "GraphQL", "Redis", "REST APIs"],
-  },
-  {
-    category: "Design",
-    skills: ["Figma", "Design Systems", "UI/UX", "Prototyping", "Accessibility"],
-  },
-  {
-    category: "Tools",
-    skills: ["Git", "Docker", "Vercel", "Storybook", "CI/CD"],
-  },
-];
+import { getSkillsForHomepage } from "@/lib/skills";
 
 export function Skills() {
+  const skillGroups = getSkillsForHomepage();
+
   return (
     <Section
       title="Skills & Tools"

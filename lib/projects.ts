@@ -1,3 +1,8 @@
+import fs from "fs";
+import path from "path";
+
+const PROJECTS_DIR = path.join(process.cwd(), "content/projects");
+
 export type Project = {
   slug: string;
   title: string;
@@ -15,44 +20,50 @@ export type Project = {
   results: string;
 };
 
-import project1 from "@/content/projects/flowstate.json";
-import project2 from "@/content/projects/pixelcraft.json";
-import project3 from "@/content/projects/devpulse.json";
-import project4 from "@/content/projects/meridian.json";
-import project5 from "@/content/projects/canvas-api.json";
+function loadProjects(): Project[] {
+  if (!fs.existsSync(PROJECTS_DIR)) return [];
 
-const projects: Project[] = [
-  project1,
-  project2,
-  project3,
-  project4,
-  project5,
-] as Project[];
+  return fs
+    .readdirSync(PROJECTS_DIR)
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(PROJECTS_DIR, file), "utf-8");
+      return JSON.parse(raw) as Project;
+    });
+}
+
+let cachedProjects: Project[] | null = null;
+
+function getProjects(): Project[] {
+  if (!cachedProjects) {
+    cachedProjects = loadProjects();
+  }
+
+  return cachedProjects;
+}
 
 export function getAllProjects(): Project[] {
-  return [...projects].sort(
+  return [...getProjects()].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
 
 export function getFeaturedProjects(): Project[] {
-  return getAllProjects().filter((p) => p.featured);
+  return getAllProjects().filter((project) => project.featured);
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
+  return getProjects().find((project) => project.slug === slug);
 }
 
 export function getAllProjectSlugs(): string[] {
-  return projects.map((p) => p.slug);
+  return getProjects().map((project) => project.slug);
 }
 
 export function getAllTags(): string[] {
   const tags = new Set<string>();
-  projects.forEach((p) => p.tags.forEach((t) => tags.add(t)));
+  getProjects().forEach((project) => {
+    project.tags.forEach((tag) => tags.add(tag));
+  });
   return Array.from(tags).sort();
-}
-
-export function getProjectsByTag(tag: string): Project[] {
-  return getAllProjects().filter((p) => p.tags.includes(tag));
 }
